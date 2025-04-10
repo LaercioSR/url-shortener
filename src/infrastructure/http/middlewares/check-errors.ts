@@ -11,6 +11,7 @@ export default function checkError(
   if (err instanceof AppError) {
     response.status(err.statusCode).json({
       message: err.message,
+      code: err.code,
     });
     return;
   }

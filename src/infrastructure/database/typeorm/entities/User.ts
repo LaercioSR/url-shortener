@@ -6,17 +6,21 @@ import {
   PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm";
-import type { IShortUrl } from "../../../../domain/entities/ShortUrl";
+import { v4 as uuidV4 } from "uuid";
+import type { IUser } from "../../../../domain/entities/User";
 
 @Entity({
-  name: "short_urls",
+  name: "users",
 })
-export class ShortUrl implements IShortUrl {
+export class User implements IUser {
   @PrimaryColumn()
   id: string;
 
-  @Column({ name: "original_url" })
-  originalUrl: string;
+  @Column()
+  username: string;
+
+  @Column({ select: false })
+  password: string;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -27,9 +31,10 @@ export class ShortUrl implements IShortUrl {
   @DeleteDateColumn({ select: false })
   deletedAt?: Date;
 
-  constructor(id: string, originalUrl: string) {
-    this.id = id;
-    this.originalUrl = originalUrl;
+  constructor(username: string, password: string) {
+    this.id = uuidV4();
+    this.username = username;
+    this.password = password;
     this.createdAt = new Date();
     this.updatedAt = new Date();
     this.deletedAt = undefined;

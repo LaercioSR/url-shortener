@@ -4,7 +4,7 @@ export class CreateShortUrlsTable1744260818169 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "short_url",
+        name: "short_urls",
         columns: [
           {
             name: "id",

@@ -33,4 +33,26 @@ describe("Create Short URL", () => {
     expect(response.status).toBe(201);
     expect(response.body.short_url).toMatch(/http:\/\/localhost:\d+\/\w+/);
   });
+
+  it("should return 400 if original_url is missing", async () => {
+    const response = await request(app).post("/short-urls").send({});
+
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({
+      message: "Missing original_url",
+      code: "MISSING_ORIGIN_URL",
+    });
+  });
+
+  it("should return 400 if original_url is invalid", async () => {
+    const response = await request(app)
+      .post("/short-urls")
+      .send({ url: "invalid-url" });
+
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({
+      message: "Invalid URL",
+      code: "INVALID_URL",
+    });
+  });
 });

@@ -16,6 +16,50 @@
 		}
 	],
 	"paths": {
+		"/{id}": {
+			"get": {
+				"description": "Redirect to the original URL",
+				"tags": [
+					"Short URL"
+				],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "The ID of the short URL",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "abc123"
+						}
+					}
+				],
+				"responses": {
+					"302": {
+						"description": "Redirect to the original URL",
+						"headers": {
+							"Location": {
+								"description": "The original URL",
+								"schema": {
+									"type": "string",
+									"format": "uri",
+									"example": "https://www.example.com"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid ID format"
+					},
+					"404": {
+						"description": "Short URL not found"
+					},
+					"500": {
+						"description": "Internal server error"
+					}
+				}
+			}
+		},
 		"/short-urls": {
 			"post": {
 				"description": "Create a short URL",

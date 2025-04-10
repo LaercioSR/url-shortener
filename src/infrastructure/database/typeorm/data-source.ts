@@ -67,7 +67,7 @@ export async function clearDatabase() {
   await AppDataSource.transaction(async (transactionalEntityManager) => {
     const tables = ["users_short_urls", "short_urls", "users"];
     for (const table of tables) {
-      await transactionalEntityManager.query(`DROP TABLE IF EXISTS ${table}`);
+      await transactionalEntityManager.query(`DELETE FROM ${table}`);
     }
   });
 }

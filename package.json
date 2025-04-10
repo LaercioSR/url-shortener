@@ -29,7 +29,8 @@
     "reflect-metadata": "^0.2.2",
     "swagger-ui-express": "^5.0.1",
     "typeorm": "^0.3.22",
-    "typeorm-naming-strategies": "^4.1.0"
+    "typeorm-naming-strategies": "^4.1.0",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.24.0",
