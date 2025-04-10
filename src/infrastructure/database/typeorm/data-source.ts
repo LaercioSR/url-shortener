@@ -63,8 +63,9 @@ export async function runMigrations() {
 
 export async function clearDatabase() {
   await AppDataSource.transaction(async (transactionalEntityManager) => {
-    await transactionalEntityManager.query("DELETE FROM users_short_urls");
-    await transactionalEntityManager.query("DELETE FROM short_urls");
-    await transactionalEntityManager.query("DELETE FROM users");
+    const tables = ["users_short_urls", "short_urls", "users"];
+    for (const table of tables) {
+      await transactionalEntityManager.query(`DROP TABLE IF EXISTS ${table}`);
+    }
   });
 }
