@@ -1,0 +1,16 @@
+# .github/actions/setup-node/action.yaml
+name: 'Node.js Setup'
+description: 'Setup Node.js and install dependencies'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+
+    - name: Install dependencies
+      run: npm install
+      shell: bash

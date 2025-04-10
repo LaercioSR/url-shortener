@@ -1,4 +1,4 @@
-name: CI (Client)
+name: CI Pipeline
 
 on:
   push:
@@ -8,14 +8,8 @@ jobs:
     name: Linting
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-
-      - name: Install dependencies
-        run: npm install
+      - name: Setup Node.js environment
+        uses: ./.github/actions/setup-node
 
       - name: Run code format check
         run: npm run format
@@ -27,5 +21,8 @@ jobs:
     name: Tests
     runs-on: ubuntu-latest
     steps:
-        - name: Run unit and e2e tests
-          run: npm run lint
+      - name: Setup Node.js environment
+        uses: ./.github/actions/setup-node
+
+      - name: Run unit and e2e tests
+        run: npm run test
