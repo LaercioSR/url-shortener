@@ -5,6 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --respawn src/main.ts",
+    "lint": "eslint \"{src,test}/**/*.{ts}\"",
+    "lint:fix": "npm run lint -- --fix",
+    "format": "prettier --check \"**/*.ts\"",
+    "format:fix": "prettier --write \"**/*.ts\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -16,10 +20,19 @@
     "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.24.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
+    "eslint": "^9.24.0",
+    "eslint-import-resolver-typescript": "^4.3.2",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jest": "^28.11.0",
+    "eslint-plugin-prettier": "^5.2.6",
+    "globals": "^16.0.0",
+    "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.29.1"
   }
 }
