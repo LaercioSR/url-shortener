@@ -28,6 +28,8 @@ function getDatabaseConfig(): DataSourceOptions {
       synchronize: true,
       logging: false,
       entities: getEntities(),
+      namingStrategy: new SnakeNamingStrategy(),
+      entitySkipConstructor: true,
     };
   }
 

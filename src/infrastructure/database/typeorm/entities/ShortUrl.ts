@@ -8,9 +8,7 @@ import {
 } from "typeorm";
 import type { IShortUrl } from "../../../../domain/entities/ShortUrl";
 
-@Entity({
-  name: "short_urls",
-})
+@Entity()
 export class ShortUrl implements IShortUrl {
   @PrimaryColumn()
   id: string;
