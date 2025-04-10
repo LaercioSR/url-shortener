@@ -5,10 +5,16 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --respawn src/main.ts",
-    "lint": "eslint \"**/*.ts\"",
-    "lint:fix": "npm run lint -- --fix",
     "format": "prettier --check \"**/*.ts\"",
     "format:fix": "prettier --write \"**/*.ts\"",
+    "lint": "eslint \"**/*.ts\"",
+    "lint:fix": "npm run lint -- --fix",
+    "typeorm": "typeorm-ts-node-commonjs -d ./src/infrastructure/database/typeorm/data-source.ts",
+    "migration:create": "typeorm-ts-node-commonjs migration:create",
+    "migration:generate": "npm run typeorm migration:generate",
+    "migration:revert": "npm run typeorm migration:revert",
+    "migration:run": "npm run typeorm migration:run",
+    "migration:show": "npm run typeorm migration:show",
     "test": "NODE_ENV=test jest --runInBand --detectOpenHandles --silent --passWithNoTests",
     "prepare": "husky"
   },
@@ -17,9 +23,13 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^5.1.0",
+    "pg": "^8.14.1",
     "reflect-metadata": "^0.2.2",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "typeorm": "^0.3.22",
+    "typeorm-naming-strategies": "^4.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.24.0",
