@@ -7,15 +7,69 @@
 	},
 	"tags": [
 		{
-			"name": "URL",
-			"description": "URL shortener operations"
-		},
-		{
 			"name": "Auth",
 			"description": "Authentication operations"
+		},
+		{
+			"name": "Short URL",
+			"description": "URL shortener operations"
 		}
 	],
-	"paths": {},
+	"paths": {
+		"/short-urls": {
+			"post": {
+				"description": "Create a short URL",
+				"tags": [
+					"Short URL"
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"url": {
+										"type": "string",
+										"format": "uri",
+										"description": "The URL to shorten",
+										"example": "https://www.example.com"
+									}
+								},
+								"required": [
+									"url"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Short URL created successfully",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"short_url": {
+											"type": "string",
+											"description": "The shortened URL",
+											"example": "http://localhost:3000/abc123"
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid URL format"
+					},
+					"500": {
+						"description": "Internal server error"
+					}
+				}
+			}
+		}
+	},
 	"components": {
 		"securitySchemes": {
 			"bearerAuth": {
