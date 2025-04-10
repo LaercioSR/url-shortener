@@ -44,7 +44,7 @@ describe("Short URLs", () => {
     expect(foundShortUrl!.originalUrl).toBe(originalUrl);
   });
 
-  it("should return null if short URL not found", async () => {
+  it("should return null when short URL non-existent", async () => {
     const id = "nonexistent";
 
     const foundShortUrl = await shortUrlsRepository.findById(id);
