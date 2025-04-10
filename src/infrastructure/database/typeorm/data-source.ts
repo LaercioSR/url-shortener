@@ -56,3 +56,15 @@ export async function initializeDataSource() {
 export async function destroyDataSource() {
   await AppDataSource.destroy();
 }
+
+export async function runMigrations() {
+  await AppDataSource.runMigrations();
+}
+
+export async function clearDatabase() {
+  await AppDataSource.transaction(async (transactionalEntityManager) => {
+    await transactionalEntityManager.query("DELETE FROM users_short_urls");
+    await transactionalEntityManager.query("DELETE FROM short_urls");
+    await transactionalEntityManager.query("DELETE FROM users");
+  });
+}
