@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dockerfile and docker-compose configuration to run the application in a containerized environment.
 - Database configuration with TypeORM to connect to PostgreSQL.
   - Added migrations to create the database schema.
+- Generator of random code with 6 alphanumeric characters for the shortened URL.
 
 ## [v0.2.0] - 2025-04-09
 
