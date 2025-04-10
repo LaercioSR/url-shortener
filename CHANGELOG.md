@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Database configuration with TypeORM to connect to PostgreSQL.
   - Added migrations to create the database schema.
 - Generator of random code with 6 alphanumeric characters for the shortened URL.
+- More information in the README file about how to run the project.
 
 ## [v0.2.0] - 2025-04-09
 
