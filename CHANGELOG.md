@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Redirect route to redirect the shortened URL to the original URL.
 - Error code for better identification of errors.
 - Route to create a new user.
+- Route to log in with an existing user.
 
 ### Changed
 

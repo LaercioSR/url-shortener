@@ -21,7 +21,7 @@ export class User implements IUser {
   @Column()
   username: string;
 
-  @Column({ select: false })
+  @Column()
   password: string;
 
   @CreateDateColumn()
