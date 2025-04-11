@@ -3,15 +3,15 @@ services:
     image: postgres:17.4
     container_name: database-url-shortener
     ports:
-      - ${DB_PORT}:5432
+      - ${DB_PORT-5432}:5432
     environment:
-      - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_USER=${DB_USERNAME}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME:-url_shortener}
+      - POSTGRES_USER=${DB_USERNAME:-root}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-12345678}
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME} -d ${DB_NAME} -h database -p 5432"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-root} -d ${DB_NAME:-url_shortener} -h database -p 5432"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -26,11 +26,11 @@ services:
       - /usr/app/node_modules
     environment:
       - APP_PORT=${APP_PORT:-3000}
-      - DB_NAME=${DB_NAME}
-      - DB_USERNAME=${DB_USERNAME}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_PORT=${DB_PORT:-5432}
-      - DB_HOST=${DB_HOST:-database}
+      - DB_NAME=${DB_NAME:-url_shortener}
+      - DB_USERNAME=${DB_USERNAME:-root}
+      - DB_PASSWORD=${DB_PASSWORD:-12345678}
+      - DB_PORT=5432
+      - DB_HOST=database
       - NODE_ENV=development
     env_file:
       - .env
@@ -42,7 +42,7 @@ services:
     command: >
       sh -c "
         echo 'Waiting for database to be ready...' &&
-        until pg_isready -h database -p 5432 -U ${DB_USERNAME}; do
+        until pg_isready -h database -p 5432 -U ${DB_USERNAME:-root}; do
           sleep 1
         done &&
         npm run typeorm migration:run &&

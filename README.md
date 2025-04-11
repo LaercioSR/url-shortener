@@ -60,7 +60,7 @@ cp .env.example .env
 To run the project with Docker, run the following command:
 
 ```bash
-docker-compose up -d
+docker compose -f 'docker-compose.yml' up -d --build
 ```
 
 ### Running without Docker
