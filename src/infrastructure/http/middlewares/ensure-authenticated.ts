@@ -16,13 +16,21 @@ export async function ensureAuthenticated(
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
-    throw new AppError("Token missing!", "TOKEN_MISSING", 401);
+    throw new AppError(
+      "Missing authentication token!",
+      "MISSING_AUTH_TOKEN",
+      401,
+    );
   }
 
   const [, token] = authHeader.split(" ");
 
   if (!token) {
-    throw new AppError("Token missing!", "TOKEN_MISSING", 401);
+    throw new AppError(
+      "Missing authentication token!",
+      "MISSING_AUTH_TOKEN",
+      401,
+    );
   }
 
   try {
@@ -32,7 +40,11 @@ export async function ensureAuthenticated(
     const users = userRepository.findById(usersId);
 
     if (!users) {
-      throw new AppError("Users does not exists!", "USERS_NOT_FOUND", 401);
+      throw new AppError(
+        "Invalid authentication token!",
+        "INVALID_AUTH_TOKEN",
+        401,
+      );
     }
 
     request.user = {
@@ -41,6 +53,10 @@ export async function ensureAuthenticated(
 
     next();
   } catch {
-    throw new AppError("Invalid token!", "INVALID_TOKEN", 401);
+    throw new AppError(
+      "Invalid authentication token!",
+      "INVALID_AUTH_TOKEN",
+      401,
+    );
   }
 }

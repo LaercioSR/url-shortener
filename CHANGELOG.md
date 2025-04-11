@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Now when an user is authenticated all the URLs created are linked to the user.
+- New route to get all the URLs created by the user.
 
 ### Changed
 

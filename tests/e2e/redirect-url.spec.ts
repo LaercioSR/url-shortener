@@ -38,6 +38,43 @@ describe("Redirect URL", () => {
     expect(response.header.location).toBe(originalUrl);
   });
 
+  it("should update click count on redirect", async () => {
+    // Create a user and login to get the token
+    const username = "testuser";
+    const password = "testpassword";
+
+    await request(app).post("/auth").send({ username, password });
+    const loginResponse = await request(app)
+      .post("/auth/login")
+      .send({ username, password });
+
+    const token = loginResponse.body.token;
+
+    // Create a short URL using the token
+    const originalUrl = "https://example.com";
+    const shortUrlResponse = await request(app)
+      .post("/short-urls")
+      .set("Authorization", token)
+      .send({ url: originalUrl });
+
+    const shortUrlId = shortUrlResponse.body.short_url.split("/").pop();
+
+    // Multi redirect to the short URL
+    await request(app).get(`/${shortUrlId}`);
+    await request(app).get(`/${shortUrlId}`);
+
+    // Check the click count
+    const response = await request(app)
+      .get("/short-urls")
+      .set("Authorization", token);
+
+    const shortUrls = response.body.shortUrls;
+    const shortUrl = shortUrls[0];
+
+    expect(shortUrl).toBeDefined();
+    expect(shortUrl.click_count).toBe(2);
+  });
+
   it("should return 400 if URL ID is invalid", async () => {
     const response = await request(app).get("/invalid-id");
 

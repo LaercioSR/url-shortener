@@ -28,8 +28,13 @@ export class ShortUrlsRepository implements IShortUrlsRepository {
     });
   }
 
-  async updateClickCount(id: string): Promise<null> {
+  async listByUserId(userId: string): Promise<IShortUrl[]> {
+    return this.repository.find({
+      where: { user_id: userId },
+    });
+  }
+
+  async updateClickCount(id: string): Promise<void> {
     await this.repository.increment({ id }, "click_count", 1);
-    return null;
   }
 }

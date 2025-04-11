@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { AppError } from "../../../domain/errors/AppError";
 import { GetShortUrlById } from "../../../application/get-short-url-by-id";
+import { UpdateClickShortUrl } from "../../../application/update-click-short-url";
 
 export class RedirectUrlController {
   async handle(request: Request, response: Response) {
@@ -16,6 +17,9 @@ export class RedirectUrlController {
     if (!shortUrl) {
       throw new AppError("URL not found", "SHORT_URL_NOT_FOUND", 404);
     }
+
+    const updateClickCountService = new UpdateClickShortUrl();
+    updateClickCountService.execute(shortUrl.id);
 
     response.status(302).redirect(shortUrl.original_url);
   }
