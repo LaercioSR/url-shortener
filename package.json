@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --transpile-only --respawn src/main.ts",
+    "dev": "ts-node-dev --poll --transpile-only --respawn --ignore-watch node_modules src/main.ts",
     "format": "prettier --check \"**/*.ts\"",
     "format:fix": "prettier --write \"**/*.ts\"",
     "lint": "eslint \"**/*.ts\"",

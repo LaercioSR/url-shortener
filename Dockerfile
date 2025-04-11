@@ -7,8 +7,8 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /usr/app
 
 COPY package*.json ./
-RUN npm install
+COPY tsconfig.json ./
 
-COPY . .
+RUN npm install
 
 EXPOSE 3000

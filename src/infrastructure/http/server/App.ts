@@ -12,7 +12,7 @@ export class App {
   async startServer() {
     await this.initializeDatabase();
 
-    const port = Number(process.env.PORT) || 3000;
+    const port = Number(process.env.APP_PORT) || 3000;
 
     this.app = await buildApp();
     this.app.listen({ port });

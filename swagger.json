@@ -138,6 +138,12 @@
 				"tags": [
 					"Short URL"
 				],
+				"security": [
+					{},
+					{
+						"bearerAuth": []
+					}
+				],
 				"requestBody": {
 					"content": {
 						"application/json": {

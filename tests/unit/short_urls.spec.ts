@@ -26,7 +26,10 @@ describe("Short URLs", () => {
     const id = "abc123";
     const originalUrl = "https://example.com";
 
-    const shortUrl = await shortUrlsRepository.create(id, originalUrl);
+    const shortUrl = await shortUrlsRepository.create({
+      id,
+      original_url: originalUrl,
+    });
     expect(shortUrl).toBeDefined();
     expect(shortUrl.id).toBe(id);
     expect(shortUrl.original_url).toBe(originalUrl);
@@ -37,7 +40,7 @@ describe("Short URLs", () => {
     const id = "abc123";
     const originalUrl = "https://example.com";
 
-    await shortUrlsRepository.create(id, originalUrl);
+    await shortUrlsRepository.create({ id, original_url: originalUrl });
 
     const foundShortUrl = await shortUrlsRepository.findById(id);
     expect(foundShortUrl).toBeDefined();
@@ -56,7 +59,7 @@ describe("Short URLs", () => {
     const id = "abc123";
     const originalUrl = "https://example.com";
 
-    await shortUrlsRepository.create(id, originalUrl);
+    await shortUrlsRepository.create({ id, original_url: originalUrl });
 
     await shortUrlsRepository.updateClickCount(id);
 

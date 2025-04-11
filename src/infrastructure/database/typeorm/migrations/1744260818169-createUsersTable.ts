@@ -38,6 +38,7 @@ export class CreateUsersTable1744260818169 implements MigrationInterface {
           },
         ],
       }),
+      true,
     );
     await queryRunner.createIndex(
       "users",

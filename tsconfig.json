@@ -9,13 +9,21 @@
     "resolveJsonModule": true,
     "strict": true,
     "skipLibCheck": true,
-    "rootDir": "./",
+    "rootDir": "./src",
     "outDir": "./dist",
     "baseUrl": "./",
     "typeRoots": [
       "./src/@types",
       "./@types",
       "./node_modules/@types"
-    ]
-  }
+    ],
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.json"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
 }

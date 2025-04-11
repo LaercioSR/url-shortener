@@ -18,7 +18,7 @@ export class ShortUrl implements IShortUrl {
   @PrimaryColumn()
   id: string;
 
-  @Column({ name: "original_url" })
+  @Column()
   original_url: string;
 
   @Column()

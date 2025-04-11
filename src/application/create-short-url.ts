@@ -9,7 +9,7 @@ export class CreateShortUrl {
     this.shortUrlsRepository = new ShortUrlsRepository();
   }
 
-  async execute(original_url: string) {
+  async execute(original_url: string, user_id?: string) {
     let id: string;
     let idAlreadyUsed;
     do {
@@ -17,7 +17,11 @@ export class CreateShortUrl {
       idAlreadyUsed = await this.shortUrlsRepository.findById(id);
     } while (idAlreadyUsed);
 
-    const shortUrl = await this.shortUrlsRepository.create(id, original_url);
+    const shortUrl = await this.shortUrlsRepository.create({
+      id,
+      original_url,
+      user_id,
+    });
 
     return shortUrl;
   }

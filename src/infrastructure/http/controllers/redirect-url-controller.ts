@@ -12,9 +12,7 @@ export class RedirectUrlController {
     }
 
     const shortUrlService = new GetShortUrlById();
-
     const shortUrl = await shortUrlService.execute(id);
-
     if (!shortUrl) {
       throw new AppError("URL not found", "SHORT_URL_NOT_FOUND", 404);
     }

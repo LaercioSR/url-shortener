@@ -54,6 +54,7 @@ export class CreateShortUrlsTable1744261632839 implements MigrationInterface {
           },
         ],
       }),
+      true,
     );
     await queryRunner.createIndex(
       "short_urls",

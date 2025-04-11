@@ -3,6 +3,7 @@ import type { IShortUrlsRepository } from "../../../../domain/ports/IShortUrlsRe
 import type { Repository } from "typeorm";
 import { AppDataSource } from "../data-source";
 import { ShortUrl } from "../entities/ShortUrl";
+import type { ICreateShortUrlDTO } from "src/domain/ports/ICreateShortUrlDTO";
 
 export class ShortUrlsRepository implements IShortUrlsRepository {
   private repository: Repository<ShortUrl>;
@@ -11,8 +12,12 @@ export class ShortUrlsRepository implements IShortUrlsRepository {
     this.repository = AppDataSource.getRepository(ShortUrl);
   }
 
-  async create(id: string, originalUrl: string): Promise<IShortUrl> {
-    const shortUrl = new ShortUrl(id, originalUrl);
+  async create({
+    id,
+    original_url,
+    user_id,
+  }: ICreateShortUrlDTO): Promise<IShortUrl> {
+    const shortUrl = new ShortUrl(id, original_url, user_id);
     await this.repository.save(shortUrl);
     return shortUrl;
   }

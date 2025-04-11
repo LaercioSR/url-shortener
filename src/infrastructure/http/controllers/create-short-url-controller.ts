@@ -6,6 +6,9 @@ import { AppError } from "../../../domain/errors/AppError";
 export class CreateShortUrlController {
   async handle(request: Request, response: Response) {
     const { url: original_url } = request.body;
+    const { id: user_id } = request.user || {
+      id: null,
+    };
 
     if (!original_url) {
       throw new AppError("Missing original_url", "MISSING_ORIGIN_URL", 400);
@@ -18,7 +21,7 @@ export class CreateShortUrlController {
 
     const shortUrlService = new CreateShortUrl();
 
-    const shortUrl = await shortUrlService.execute(original_url);
+    const shortUrl = await shortUrlService.execute(original_url, user_id);
 
     const appUrl = process.env.APP_API_URL || "http://localhost:3000";
 
