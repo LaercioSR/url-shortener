@@ -300,6 +300,96 @@
 					}
 				}
 			}
+		},
+		"/short-urls/{id}": {
+			"delete": {
+				"description": "Delete a short URL",
+				"tags": [
+					"Short URL"
+				],
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "The ID of the short URL to delete",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "abc123"
+						}
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Short URL deleted successfully"
+					},
+					"404": {
+						"description": "Short URL not found"
+					},
+					"500": {
+						"description": "Internal server error"
+					}
+				}
+			},
+			"patch": {
+				"description": "Update a short URL",
+				"tags": [
+					"Short URL"
+				],
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "The ID of the short URL to update",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"example": "abc123"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"url": {
+										"type": "string",
+										"format": "uri",
+										"description": "The new URL to shorten",
+										"example": "https://www.example.com"
+									}
+								},
+								"required": [
+									"url"
+								]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Short URL updated successfully"
+					},
+					"400": {
+						"description": "Invalid URL format"
+					},
+					"404": {
+						"description": "Short URL not found"
+					}
+				}
+			}
 		}
 	},
 	"components": {
