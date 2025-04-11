@@ -1,7 +1,9 @@
 export interface IShortUrl {
   id: string;
-  originalUrl: string;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt?: Date;
+  original_url: string;
+  click_count: number;
+  user_id?: string;
+  created_at: Date;
+  updated_at: Date;
+  deleted_at?: Date;
 }

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { validateUrl } from "../../../shared/utils/validate-url";
-import { CreateShortUrl } from "../../../aplication/create-short-url";
+import { CreateShortUrl } from "../../../application/create-short-url";
 import { AppError } from "../../../domain/errors/AppError";
 
 export class CreateShortUrlController {

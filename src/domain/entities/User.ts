@@ -2,7 +2,7 @@ export interface IUser {
   id: string;
   username: string;
   password: string;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt?: Date;
+  created_at: Date;
+  updated_at: Date;
+  deleted_at?: Date;
 }

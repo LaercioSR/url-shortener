@@ -29,7 +29,7 @@ describe("Users", () => {
     const user = await usersRepository.create(username, password);
     expect(user).toBeDefined();
     expect(user.username).toBe(username);
-    expect(user.createdAt).toBeInstanceOf(Date);
+    expect(user.created_at).toBeInstanceOf(Date);
   });
 
   it("should find an user by username", async () => {

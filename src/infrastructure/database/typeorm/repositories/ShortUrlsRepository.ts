@@ -22,4 +22,9 @@ export class ShortUrlsRepository implements IShortUrlsRepository {
       where: { id },
     });
   }
+
+  async updateClickCount(id: string): Promise<null> {
+    await this.repository.increment({ id }, "click_count", 1);
+    return null;
+  }
 }

@@ -3,11 +3,13 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 import type { IUser } from "../../../../domain/entities/User";
+import { ShortUrl } from "./ShortUrl";
 
 @Entity({
   name: "users",
@@ -23,20 +25,23 @@ export class User implements IUser {
   password: string;
 
   @CreateDateColumn()
-  createdAt: Date;
+  created_at: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updated_at: Date;
 
   @DeleteDateColumn({ select: false })
-  deletedAt?: Date;
+  deleted_at?: Date;
+
+  @OneToMany(() => ShortUrl, (ShortUrl) => ShortUrl.user)
+  shortUrls!: ShortUrl[];
 
   constructor(username: string, password: string) {
     this.id = uuidV4();
     this.username = username;
     this.password = password;
-    this.createdAt = new Date();
-    this.updatedAt = new Date();
-    this.deletedAt = undefined;
+    this.created_at = new Date();
+    this.updated_at = new Date();
+    this.deleted_at = undefined;
   }
 }

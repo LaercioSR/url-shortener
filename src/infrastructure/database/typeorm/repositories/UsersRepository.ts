@@ -22,4 +22,10 @@ export class UsersRepository implements IUsersRepository {
       where: { username },
     });
   }
+
+  async findById(id: string): Promise<IUser | null> {
+    return this.repository.findOne({
+      where: { id },
+    });
+  }
 }

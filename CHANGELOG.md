@@ -11,10 +11,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Redirect route to redirect the shortened URL to the original URL.
 - Error code for better identification of errors.
+- Route to create a new user.
 
 ### Changed
 
 - Table name from `short_url` to `short_urls`.
+- Folder name from `src/aplication` to `src/application`.
+
+### Removed
+
+- Table for relationship between the user and the short URL.
 
 ## [0.4.0] - 2025-04-10
 

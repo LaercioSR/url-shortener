@@ -3,10 +3,13 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm";
 import type { IShortUrl } from "../../../../domain/entities/ShortUrl";
+import { User } from "./User";
 
 @Entity({
   name: "short_urls",
@@ -16,22 +19,38 @@ export class ShortUrl implements IShortUrl {
   id: string;
 
   @Column({ name: "original_url" })
-  originalUrl: string;
+  original_url: string;
+
+  @Column()
+  click_count: number;
+
+  @Column({
+    nullable: true,
+  })
+  user_id?: string;
 
   @CreateDateColumn()
-  createdAt: Date;
+  created_at: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updated_at: Date;
 
   @DeleteDateColumn({ select: false })
-  deletedAt?: Date;
+  deleted_at?: Date;
 
-  constructor(id: string, originalUrl: string) {
+  @ManyToOne(() => User)
+  @JoinColumn({
+    name: "user_id",
+  })
+  user?: User | null;
+
+  constructor(id: string, originalUrl: string, userId?: string) {
     this.id = id;
-    this.originalUrl = originalUrl;
-    this.createdAt = new Date();
-    this.updatedAt = new Date();
-    this.deletedAt = undefined;
+    this.original_url = originalUrl;
+    this.user_id = userId;
+    this.click_count = 0;
+    this.created_at = new Date();
+    this.updated_at = new Date();
+    this.deleted_at = undefined;
   }
 }
