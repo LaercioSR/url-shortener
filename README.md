@@ -21,15 +21,15 @@ See [CHANGELOG.md](CHANGELOG.md) for the list of changes made to the project.
 
 ## Features
 
-- [ ] Create a short URL;
-  - [ ] Link the short URL with authenticated user;
-- [ ] Redirect to the original URL;
-  - [ ] Track the number of clicks on the short URL;
-- [ ] Create user accounts;
-- [ ] Authenticate users;
-- [ ] List all short URLs created by a user;
-- [ ] Delete a short URL;
-- [ ] Update a short URL;
+- [x] Create a short URL;
+  - [x] Link the short URL with authenticated user;
+- [x] Redirect to the original URL;
+  - [x] Track the number of clicks on the short URL;
+- [x] Create user accounts;
+- [x] Authenticate users;
+- [x] List all short URLs created by a user;
+- [x] Delete a short URL;
+- [x] Update a short URL;
 
 ## How to run
 
