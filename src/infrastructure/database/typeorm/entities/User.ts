@@ -19,7 +19,7 @@ export class User implements IUser {
   id: string;
 
   @Column()
-  username: string;
+  email: string;
 
   @Column()
   password: string;
@@ -36,9 +36,9 @@ export class User implements IUser {
   @OneToMany(() => ShortUrl, (ShortUrl) => ShortUrl.user)
   shortUrls!: ShortUrl[];
 
-  constructor(username: string, password: string) {
+  constructor(email: string, password: string) {
     this.id = uuidV4();
-    this.username = username;
+    this.email = email;
     this.password = password;
     this.created_at = new Date();
     this.updated_at = new Date();

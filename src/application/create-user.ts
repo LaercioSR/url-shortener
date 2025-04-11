@@ -10,20 +10,19 @@ export class CreateUser {
     this.usersRepository = new UsersRepository();
   }
 
-  async execute(username: string, password: string) {
-    const userAlreadyExists =
-      await this.usersRepository.findByUsername(username);
+  async execute(email: string, password: string) {
+    const userAlreadyExists = await this.usersRepository.findByEmail(email);
     if (userAlreadyExists) {
       throw new AppError(
-        `The username '${username}' is already taken.`,
-        "USERNAME_IN_USE",
+        `The email '${email}' is already taken.`,
+        "EMAIL_IN_USE",
         409,
       );
     }
 
     const passwordHash = await hash(password, 8);
 
-    const user = await this.usersRepository.create(username, passwordHash);
+    const user = await this.usersRepository.create(email, passwordHash);
 
     return user;
   }

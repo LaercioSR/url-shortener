@@ -24,70 +24,70 @@ describe("Login User", () => {
   });
 
   it("should login a user", async () => {
-    const username = "testuser";
+    const email = "testuser";
     const password = "testpassword";
 
-    await request(app).post("/auth").send({ username, password });
+    await request(app).post("/auth").send({ email, password });
 
     const response = await request(app)
       .post("/auth/login")
-      .send({ username, password });
+      .send({ email, password });
 
     expect(response.status).toBe(200);
     expect(response.body.token).toBeDefined();
     expect(response.body.token).toMatch(/^Bearer /);
   });
 
-  it("should return 400 if username is missing", async () => {
+  it("should return 400 if email is missing", async () => {
     const response = await request(app)
       .post("/auth/login")
       .send({ password: "testpassword" });
 
     expect(response.status).toBe(400);
     expect(response.body).toEqual({
-      message: "Missing username or password",
-      code: "MISSING_USERNAME_PASSWORD",
+      message: "Missing email or password",
+      code: "MISSING_EMAIL_PASSWORD",
     });
   });
 
   it("should return 400 if password is missing", async () => {
     const response = await request(app)
       .post("/auth/login")
-      .send({ username: "testuser" });
+      .send({ email: "testuser" });
 
     expect(response.status).toBe(400);
     expect(response.body).toEqual({
-      message: "Missing username or password",
-      code: "MISSING_USERNAME_PASSWORD",
+      message: "Missing email or password",
+      code: "MISSING_EMAIL_PASSWORD",
     });
   });
 
-  it("should return 401 if username non-existent", async () => {
+  it("should return 401 if email non-existent", async () => {
     const response = await request(app)
       .post("/auth/login")
-      .send({ username: "wronguser", password: "wrongpassword" });
+      .send({ email: "wronguser", password: "wrongpassword" });
 
     expect(response.status).toBe(401);
     expect(response.body).toEqual({
-      message: "Username or password incorrect!",
-      code: "INVALID_USERNAME_PASSWORD",
+      message: "Email or password incorrect!",
+      code: "INVALID_EMAIL_PASSWORD",
     });
   });
 
   it("should return 401 if password is incorrect", async () => {
-    const username = "testuser";
+    const email = "testuser";
     const password = "testpassword";
 
-    await request(app).post("/auth").send({ username, password });
+    await request(app).post("/auth").send({ email, password });
 
     const response = await request(app)
       .post("/auth/login")
-      .send({ username, password: "wrongpassword" });
+      .send({ email, password: "wrongpassword" });
 
     expect(response.status).toBe(401);
     expect(response.body).toEqual({
-      message: "Username or password incorrect!",
-      code: "INVALID_USERNAME_PASSWORD",
+      message: "Email or password incorrect!",
+      code: "INVALID_EMAIL_PASSWORD",
     });
   });
 });

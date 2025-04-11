@@ -40,13 +40,13 @@ describe("Redirect URL", () => {
 
   it("should update click count on redirect", async () => {
     // Create a user and login to get the token
-    const username = "testuser";
+    const email = "testuser";
     const password = "testpassword";
 
-    await request(app).post("/auth").send({ username, password });
+    await request(app).post("/auth").send({ email, password });
     const loginResponse = await request(app)
       .post("/auth/login")
-      .send({ username, password });
+      .send({ email, password });
 
     const token = loginResponse.body.token;
 

@@ -25,13 +25,13 @@ describe("Update Short URL", () => {
 
   it("should update a short URL", async () => {
     // Create a user and login to get the token
-    const username = "testuser";
+    const email = "testuser";
     const password = "testpassword";
 
-    await request(app).post("/auth").send({ username, password });
+    await request(app).post("/auth").send({ email, password });
     const loginResponse = await request(app)
       .post("/auth/login")
-      .send({ username, password });
+      .send({ email, password });
 
     const token = loginResponse.body.token;
 
@@ -88,13 +88,13 @@ describe("Update Short URL", () => {
 
   it("should return 404 if the short URL does not exist", async () => {
     // Create a user and login to get the token
-    const username = "testuser";
+    const email = "testuser";
     const password = "testpassword";
 
-    await request(app).post("/auth").send({ username, password });
+    await request(app).post("/auth").send({ email, password });
     const loginResponse = await request(app)
       .post("/auth/login")
-      .send({ username, password });
+      .send({ email, password });
 
     const token = loginResponse.body.token;
 
@@ -109,13 +109,13 @@ describe("Update Short URL", () => {
 
   it("should return 404 if the short URL is belonging to another user", async () => {
     // Create a user and login to get the token
-    const username = "testuser";
+    const email = "testuser";
     const password = "testpassword";
 
-    await request(app).post("/auth").send({ username, password });
+    await request(app).post("/auth").send({ email, password });
     const loginResponse = await request(app)
       .post("/auth/login")
-      .send({ username, password });
+      .send({ email, password });
 
     const token = loginResponse.body.token;
 
@@ -129,16 +129,16 @@ describe("Update Short URL", () => {
     const shortUrlId = shortUrlResponse.body.short_url.split("/").pop();
 
     // Create another user and login to get another token
-    const anotherUsername = "anotheruser";
+    const anotherEmail = "anotheruser";
     const anotherPassword = "anotherpassword";
 
     await request(app).post("/auth").send({
-      username: anotherUsername,
+      email: anotherEmail,
       password: anotherPassword,
     });
     const anotherLoginResponse = await request(app)
       .post("/auth/login")
-      .send({ username: anotherUsername, password: anotherPassword });
+      .send({ email: anotherEmail, password: anotherPassword });
 
     const anotherToken = anotherLoginResponse.body.token;
 

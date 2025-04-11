@@ -24,18 +24,18 @@ describe("List Short URLs by Uber", () => {
   });
 
   it("should list short URLs", async () => {
-    const username = "testuser";
+    const email = "testuser";
     const password = "testpassword";
 
     const createResponse = await request(app)
       .post("/auth")
-      .send({ username, password });
+      .send({ email, password });
 
     const userId = createResponse.body.id;
 
     const loginResponse = await request(app)
       .post("/auth/login")
-      .send({ username, password });
+      .send({ email, password });
 
     const token = loginResponse.body.token;
 

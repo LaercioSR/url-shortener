@@ -24,81 +24,79 @@ describe("Create User", () => {
   });
 
   it("should create a user", async () => {
-    const username = "testuser";
+    const email = "testuser";
     const password = "testpassword";
 
-    const response = await request(app)
-      .post("/auth")
-      .send({ username, password });
+    const response = await request(app).post("/auth").send({ email, password });
 
     expect(response.status).toBe(201);
-    expect(response.body.username).toBe(username);
+    expect(response.body.email).toBe(email);
     expect(response.body.created_at).toBeDefined();
     expect(response.body.password).toBeUndefined();
   });
 
-  it("should return 400 if username is missing", async () => {
+  it("should return 400 if email is missing", async () => {
     const response = await request(app)
       .post("/auth")
       .send({ password: "testpassword" });
 
     expect(response.status).toBe(400);
     expect(response.body).toEqual({
-      message: "Missing username or password",
-      code: "MISSING_USERNAME_PASSWORD",
+      message: "Missing email or password",
+      code: "MISSING_EMAIL_PASSWORD",
     });
   });
 
   it("should return 400 if password is missing", async () => {
     const response = await request(app)
       .post("/auth")
-      .send({ username: "testuser" });
+      .send({ email: "testuser" });
 
     expect(response.status).toBe(400);
     expect(response.body).toEqual({
-      message: "Missing username or password",
-      code: "MISSING_USERNAME_PASSWORD",
+      message: "Missing email or password",
+      code: "MISSING_EMAIL_PASSWORD",
     });
   });
 
-  it("should return 400 if username is empty", async () => {
+  it("should return 400 if email is empty", async () => {
     const response = await request(app)
       .post("/auth")
-      .send({ username: "", password: "testpassword" });
+      .send({ email: "", password: "testpassword" });
 
     expect(response.status).toBe(400);
     expect(response.body).toEqual({
-      message: "Missing username or password",
-      code: "MISSING_USERNAME_PASSWORD",
+      message: "Missing email or password",
+      code: "MISSING_EMAIL_PASSWORD",
     });
   });
 
   it("should return 400 if password is empty", async () => {
     const response = await request(app)
       .post("/auth")
-      .send({ username: "testuser", password: "" });
+      .send({ email: "testuser", password: "" });
 
     expect(response.status).toBe(400);
     expect(response.body).toEqual({
-      message: "Missing username or password",
-      code: "MISSING_USERNAME_PASSWORD",
+      message: "Missing email or password",
+      code: "MISSING_EMAIL_PASSWORD",
     });
   });
 
-  it("should return 409 if username is already in use", async () => {
-    const username = "testuser";
+  it("should return 409 if email is already in use", async () => {
+    const email = "testuser";
     const password = "testpassword";
 
-    await request(app).post("/auth").send({ username, password });
+    await request(app).post("/auth").send({ email, password });
 
     const response = await request(app)
       .post("/auth")
-      .send({ username, password: "anotherpassword" });
+      .send({ email, password: "anotherpassword" });
 
     expect(response.status).toBe(409);
     expect(response.body).toEqual({
-      message: `The username '${username}' is already taken.`,
-      code: "USERNAME_IN_USE",
+      message: `The email '${email}' is already taken.`,
+      code: "EMAIL_IN_USE",
     });
   });
 });

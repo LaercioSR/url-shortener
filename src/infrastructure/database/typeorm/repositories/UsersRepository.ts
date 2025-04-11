@@ -11,15 +11,15 @@ export class UsersRepository implements IUsersRepository {
     this.repository = AppDataSource.getRepository(User);
   }
 
-  async create(username: string, password: string): Promise<IUser> {
-    const user = new User(username, password);
+  async create(email: string, password: string): Promise<IUser> {
+    const user = new User(email, password);
     await this.repository.save(user);
     return user;
   }
 
-  async findByUsername(username: string): Promise<IUser | null> {
+  async findByEmail(email: string): Promise<IUser | null> {
     return this.repository.findOne({
-      where: { username },
+      where: { email },
     });
   }
 

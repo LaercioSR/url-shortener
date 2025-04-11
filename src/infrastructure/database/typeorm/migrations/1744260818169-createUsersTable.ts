@@ -13,7 +13,7 @@ export class CreateUsersTable1744260818169 implements MigrationInterface {
             primaryKeyConstraintName: "PK_users_id",
           },
           {
-            name: "username",
+            name: "email",
             type: "varchar",
             isUnique: true,
           },
@@ -43,14 +43,14 @@ export class CreateUsersTable1744260818169 implements MigrationInterface {
     await queryRunner.createIndex(
       "users",
       new TableIndex({
-        name: "users_username_idx",
-        columnNames: ["username"],
+        name: "users_email_idx",
+        columnNames: ["email"],
       }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropIndex("users", "users_username_idx");
+    await queryRunner.dropIndex("users", "users_email_idx");
     await queryRunner.dropTable("users");
   }
 }

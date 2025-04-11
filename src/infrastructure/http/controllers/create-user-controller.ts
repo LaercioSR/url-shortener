@@ -4,23 +4,23 @@ import { AppError } from "../../../domain/errors/AppError";
 
 export class CreateUserController {
   async handle(request: Request, response: Response) {
-    const { username, password } = request.body;
+    const { email, password } = request.body;
 
-    if (!username || !password) {
+    if (!email || !password) {
       throw new AppError(
-        "Missing username or password",
-        "MISSING_USERNAME_PASSWORD",
+        "Missing email or password",
+        "MISSING_EMAIL_PASSWORD",
         400,
       );
     }
 
     const userService = new CreateUser();
 
-    const user = await userService.execute(username, password);
+    const user = await userService.execute(email, password);
 
     response.status(201).json({
       id: user.id,
-      username: user.username,
+      email: user.email,
       created_at: user.created_at,
     });
   }

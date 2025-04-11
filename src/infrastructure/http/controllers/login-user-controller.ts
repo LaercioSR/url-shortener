@@ -4,19 +4,19 @@ import { AppError } from "../../../domain/errors/AppError";
 
 export class LoginUserController {
   async handle(request: Request, response: Response) {
-    const { username, password } = request.body;
+    const { email, password } = request.body;
 
-    if (!username || !password) {
+    if (!email || !password) {
       throw new AppError(
-        "Missing username or password",
-        "MISSING_USERNAME_PASSWORD",
+        "Missing email or password",
+        "MISSING_EMAIL_PASSWORD",
         400,
       );
     }
 
     const loginService = new LoginUser();
 
-    const token = await loginService.execute(username, password);
+    const token = await loginService.execute(email, password);
 
     response.status(200).json({ token: `Bearer ${token}` });
   }

@@ -23,31 +23,31 @@ describe("Users", () => {
   });
 
   it("should create a user", async () => {
-    const username = "testuser";
+    const email = "testuser";
     const password = "testpassword";
 
-    const user = await usersRepository.create(username, password);
+    const user = await usersRepository.create(email, password);
     expect(user).toBeDefined();
-    expect(user.username).toBe(username);
+    expect(user.email).toBe(email);
     expect(user.created_at).toBeInstanceOf(Date);
   });
 
-  it("should find an user by username", async () => {
-    const username = "testuser";
+  it("should find an user by email", async () => {
+    const email = "testuser";
     const password = "testpassword";
 
-    const user = await usersRepository.create(username, password);
+    const user = await usersRepository.create(email, password);
 
-    const foundUser = await usersRepository.findByUsername(username);
+    const foundUser = await usersRepository.findByEmail(email);
     expect(foundUser).toBeDefined();
     expect(foundUser!.id).toBe(user.id);
-    expect(foundUser!.username).toBe(username);
+    expect(foundUser!.email).toBe(email);
   });
 
   it("should return null when user non-existent", async () => {
-    const username = "nonexistent";
+    const email = "nonexistent";
 
-    const foundUser = await usersRepository.findByUsername(username);
+    const foundUser = await usersRepository.findByEmail(email);
     expect(foundUser).toBeNull();
   });
 });

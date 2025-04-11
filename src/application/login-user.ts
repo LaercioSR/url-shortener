@@ -12,13 +12,13 @@ export class LoginUser {
     this.usersRepository = new UsersRepository();
   }
 
-  async execute(username: string, password: string) {
-    const user = await this.usersRepository.findByUsername(username);
+  async execute(email: string, password: string) {
+    const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
       throw new AppError(
-        "Username or password incorrect!",
-        "INVALID_USERNAME_PASSWORD",
+        "Email or password incorrect!",
+        "INVALID_EMAIL_PASSWORD",
         401,
       );
     }
@@ -26,8 +26,8 @@ export class LoginUser {
     const passwordMatch = await compare(password, user.password);
     if (!passwordMatch) {
       throw new AppError(
-        "Username or password incorrect!",
-        "INVALID_USERNAME_PASSWORD",
+        "Email or password incorrect!",
+        "INVALID_EMAIL_PASSWORD",
         401,
       );
     }
