@@ -140,4 +140,49 @@ describe("Short URLs", () => {
     const shortUrls = await shortUrlsRepository.listByUserId(user.id);
     expect(shortUrls).toHaveLength(0);
   });
+
+  it("should delete a short URL", async () => {
+    const id = "abc123";
+    const originalUrl = "https://example.com";
+
+    await shortUrlsRepository.create({ id, original_url: originalUrl });
+
+    await shortUrlsRepository.delete(id);
+
+    const foundShortUrl = await shortUrlsRepository.findById(id);
+    expect(foundShortUrl).toBeNull();
+  });
+
+  it("should not delete a non-existent short URL", async () => {
+    const id = "nonexistent";
+
+    await shortUrlsRepository.delete(id);
+
+    const foundShortUrl = await shortUrlsRepository.findById(id);
+    expect(foundShortUrl).toBeNull();
+  });
+
+  it("should update original URL", async () => {
+    const id = "abc123";
+    const originalUrl = "https://example.com";
+    const newOriginalUrl = "https://updated.example.com";
+
+    await shortUrlsRepository.create({ id, original_url: originalUrl });
+
+    await shortUrlsRepository.updateOriginalUrl(id, newOriginalUrl);
+
+    const updatedShortUrl = await shortUrlsRepository.findById(id);
+    expect(updatedShortUrl).toBeDefined();
+    expect(updatedShortUrl!.original_url).toBe(newOriginalUrl);
+  });
+
+  it("should not update original URL for non-existent short URL", async () => {
+    const id = "nonexistent";
+    const newOriginalUrl = "https://updated.example.com";
+
+    await shortUrlsRepository.updateOriginalUrl(id, newOriginalUrl);
+
+    const foundShortUrl = await shortUrlsRepository.findById(id);
+    expect(foundShortUrl).toBeNull();
+  });
 });

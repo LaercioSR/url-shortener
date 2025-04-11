@@ -22,6 +22,10 @@ export class ShortUrlsRepository implements IShortUrlsRepository {
     return shortUrl;
   }
 
+  async delete(id: string): Promise<void> {
+    await this.repository.softDelete({ id });
+  }
+
   async findById(id: string): Promise<IShortUrl | null> {
     return this.repository.findOne({
       where: { id },
@@ -36,5 +40,9 @@ export class ShortUrlsRepository implements IShortUrlsRepository {
 
   async updateClickCount(id: string): Promise<void> {
     await this.repository.increment({ id }, "click_count", 1);
+  }
+
+  async updateOriginalUrl(id: string, originalUrl: string): Promise<void> {
+    await this.repository.update({ id }, { original_url: originalUrl });
   }
 }
