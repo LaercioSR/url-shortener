@@ -72,9 +72,9 @@
 							"schema": {
 								"type": "object",
 								"properties": {
-									"username": {
+									"email": {
 										"type": "string",
-										"description": "The username of the user",
+										"description": "The email of the user",
 										"example": "user123"
 									},
 									"password": {
@@ -84,7 +84,7 @@
 									}
 								},
 								"required": [
-									"username",
+									"email",
 									"password"
 								]
 							}
@@ -104,9 +104,9 @@
 											"description": "The ID of the user",
 											"format": "uuid"
 										},
-										"username": {
+										"email": {
 											"type": "string",
-											"description": "The username of the user",
+											"description": "The email of the user",
 											"example": "user123"
 										},
 										"created_at": {
@@ -124,7 +124,7 @@
 						"description": "Invalid input data"
 					},
 					"409": {
-						"description": "Username already exists"
+						"description": "Email already exists"
 					},
 					"500": {
 						"description": "Internal server error"
@@ -144,9 +144,9 @@
 							"schema": {
 								"type": "object",
 								"properties": {
-									"username": {
+									"email": {
 										"type": "string",
-										"description": "The username of the user",
+										"description": "The email of the user",
 										"example": "user123"
 									},
 									"password": {
@@ -156,7 +156,7 @@
 									}
 								},
 								"required": [
-									"username",
+									"email",
 									"password"
 								]
 							}
@@ -182,7 +182,7 @@
 						}
 					},
 					"401": {
-						"description": "Invalid username or password"
+						"description": "Invalid email or password"
 					},
 					"500": {
 						"description": "Internal server error"
