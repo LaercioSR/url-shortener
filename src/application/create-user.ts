@@ -1,7 +1,7 @@
 import { hash } from "bcryptjs";
 import type { IUsersRepository } from "../domain/ports/IUsersRepository";
 import { UsersRepository } from "../infrastructure/database/typeorm/repositories/UsersRepository";
-import { AppError } from "src/domain/errors/AppError";
+import { AppError } from "../domain/errors/AppError";
 
 export class CreateUser {
   private usersRepository: IUsersRepository;
